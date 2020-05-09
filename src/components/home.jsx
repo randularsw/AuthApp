@@ -3,27 +3,44 @@ import { Link } from "react-router-dom";
 import { getTimes, addTime } from "../services/timeService";
 
 class Home extends Component {
-  state = {};
+  state = {
+    times: [],
+  };
 
   async componentDidMount() {
-    const times = await getTimes();
-    console.log(times);
+    const { data: times } = await getTimes();
+    this.setState({ times });
   }
 
   async onSave() {
-    const time = await addTime(Date.now());
+    const { data: time } = await addTime({ data: Date.now() });
     console.log(time);
   }
 
+  // async onDelete() {
+  //   const { data: times } = await deleteAll();
+  //   console.log(times);
+  // }
+
   render() {
+    const { times } = this.state;
     return (
-      <div className="d-flex justify-content-center">
-        <h4 className="mt-4">
-          TimeStamps{" "}
-          <Link to={this.onSave}>
-            <i className="far fa-clock"></i>
-          </Link>
-        </h4>
+      <div>
+        <div className="d-flex justify-content-center">
+          <h4 className="m-4">
+            TimeStamps{" "}
+            <Link to={this.onSave}>
+              <i className="far fa-clock"></i>
+            </Link>
+          </h4>
+        </div>
+        <div className="d-flex justify-content-center">
+          <ul>
+            {times.map((t) => (
+              <li key={t._id}>{t.data}</li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }
