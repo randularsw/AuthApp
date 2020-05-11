@@ -25,14 +25,14 @@ router.post("/", async (req, res) => {
   }
 });
 
-// router.delete("/", async (req, res) => {
-//   try {
-//     const times = await Time.remove({ _id: "5eb6670aad8b791cc40f487f" });
-//     console.log(times);
-//     res.json(times);
-//   } catch (error) {
-//     res.json({ message: error });
-//   }
-// });
+router.delete("/", async (req, res) => {
+  try {
+    const times = await Time.deleteMany({});
+    console.log(times);
+    res.json(times);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
 
 module.exports = router;

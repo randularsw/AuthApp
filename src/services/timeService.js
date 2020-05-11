@@ -8,6 +8,6 @@ export function addTime(time) {
   return axios.post("http://localhost:4000/api/times", time);
 }
 
-// export function deleteAll() {
-//   return axios.delete("http://localhost:4000/api/times");
-// }
+export function deleteAll() {
+  return axios.delete("http://localhost:4000/api/times");
+}

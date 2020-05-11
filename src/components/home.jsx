@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { getTimes, addTime } from "../services/timeService";
+import { getTimes, addTime, deleteAll } from "../services/timeService";
 
 class Home extends Component {
   state = {
@@ -17,21 +16,33 @@ class Home extends Component {
     console.log(time);
   }
 
-  // async onDelete() {
-  //   const { data: times } = await deleteAll();
-  //   console.log(times);
-  // }
+  async onDelete() {
+    const { data: times } = await deleteAll();
+    console.log(times);
+  }
 
   render() {
+    console.log("Render Home");
     const { times } = this.state;
     return (
       <div>
         <div className="d-flex justify-content-center">
           <h4 className="m-4">
             TimeStamps{" "}
-            <Link to={this.onSave}>
+            <button
+              type="button"
+              className="btn btn-primary mr-2"
+              onClick={this.onSave}
+            >
               <i className="far fa-clock"></i>
-            </Link>
+            </button>
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={this.onDelete}
+            >
+              <i className="far fa-trash-alt"></i>
+            </button>
           </h4>
         </div>
         <div className="d-flex justify-content-center">
