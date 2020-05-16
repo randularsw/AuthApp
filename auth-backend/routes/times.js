@@ -1,6 +1,7 @@
 const express = require("express");
 const Time = require("../models/Time");
 const router = express.Router();
+const verify = require("../middleware/verify");
 
 router.get("/", async (req, res) => {
   try {
@@ -12,7 +13,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", verify, async (req, res) => {
   try {
     const time = new Time({
       data: req.body.data,
