@@ -7,8 +7,8 @@ const Login = () => {
   const { register, handleSubmit, errors, reset } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
-    await login(data);
+    const { data: user } = await login(data);
+    console.log(user);
     reset({ email: "" });
     reset({ password: "" });
   };
