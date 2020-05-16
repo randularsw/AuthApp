@@ -6,20 +6,45 @@ class Home extends Component {
     times: [],
   };
 
-  async componentDidMount() {
-    const { data: times } = await getTimes();
-    this.setState({ times });
+  // constructor(props) {
+  //   super(props);
+  // }
+
+  async getTimesData() {
+    try {
+      const { data: times } = await getTimes();
+      this.setState({ times });
+    } catch (ex) {
+      console.log("exception", ex);
+      // if(ex.response)
+    }
   }
 
-  async onSave() {
-    const { data: time } = await addTime({ data: Date.now() });
-    console.log(time);
+  componentDidMount() {
+    this.getTimesData();
   }
 
-  async onDelete() {
-    const { data: times } = await deleteAll();
-    console.log(times);
-  }
+  onSave = async () => {
+    try {
+      const { data: time } = await addTime({ data: Date.now() });
+      console.log(time);
+      this.getTimesData();
+    } catch (ex) {
+      console.log("exception", ex);
+      // if(ex.response)
+    }
+  };
+
+  onDelete = async () => {
+    try {
+      const { data: times } = await deleteAll();
+      console.log(times);
+      this.getTimesData();
+    } catch (ex) {
+      console.log("exception", ex);
+      // if(ex.response)
+    }
+  };
 
   render() {
     console.log("Render Home");

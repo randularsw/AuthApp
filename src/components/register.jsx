@@ -1,27 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { login } from "../services/authService";
+import { addUser } from "../services/userService";
 
-const Login = () => {
+const Register = () => {
   const { register, handleSubmit, errors, reset } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
-    await login(data);
+    const { data: user } = await addUser(data);
+    console.log(user);
     reset({ email: "" });
+    reset({ name: "" });
     reset({ password: "" });
   };
 
   return (
     <div className="my-5 mx-auto" style={{ width: "50%" }}>
-      <h4>Login</h4>
-      <Link to="/register">Register</Link> instead
+      <h4>Register</h4>
+      <Link to="/login">Login</Link> instead
       <br />
       <br />
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
-          <label htmlFor="email">Email address</label>
+          <label htmlFor="email">Email</label>
           <input
             type="text"
             id="email"
@@ -32,6 +33,21 @@ const Login = () => {
           {errors.email?.type === "required" && (
             <small className="text-danger">
               <p>Email Required</p>
+            </small>
+          )}
+        </div>
+        <div className="form-group">
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            className="form-control"
+            name="name"
+            ref={register({ required: true })}
+          />
+          {errors.name?.type === "required" && (
+            <small className="text-danger">
+              <p>Name Required</p>
             </small>
           )}
         </div>
@@ -66,4 +82,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

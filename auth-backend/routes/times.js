@@ -19,9 +19,9 @@ router.post("/", async (req, res) => {
     });
     // console.log(time);
     const savedTime = await time.save();
-    res.json(savedTime);
+    res.send(savedTime);
   } catch (error) {
-    res.json({ message: error });
+    res.send({ data: error });
   }
 });
 
@@ -29,9 +29,9 @@ router.delete("/", async (req, res) => {
   try {
     const times = await Time.deleteMany({});
     console.log(times);
-    res.json(times);
+    res.send(times);
   } catch (error) {
-    res.json({ message: error });
+    res.send({ data: error });
   }
 });
 
