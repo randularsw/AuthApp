@@ -21,7 +21,10 @@ router.post("/", async (req, res) => {
     const tokenSecret = "gj56ubrtb2yesyv63jhn6rt3j";
     const token = jwt.sign({ _id: user._id }, tokenSecret);
 
-    res.header("token", token).send({ data: saved._id });
+    res
+      .header("token", token)
+      .header("access-control-expose-headers", "token")
+      .send({ data: saved._id });
   } catch (error) {
     res.send({ data: error });
   }
@@ -38,7 +41,10 @@ router.post("/login", async (req, res) => {
     const tokenSecret = "gj56ubrtb2yesyv63jhn6rt3j";
     const token = jwt.sign({ _id: user._id }, tokenSecret);
 
-    res.header("token", token).send({ data: user._id });
+    res
+      .header("token", token)
+      .header("access-control-expose-headers", "token")
+      .send({ data: user._id });
   } catch (error) {
     res.send({ data: error });
   }
