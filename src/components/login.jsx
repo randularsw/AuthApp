@@ -1,16 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { login } from "../services/authService";
+import authService from "../services/authService";
 
-const Login = () => {
+const Login = (props) => {
   const { register, handleSubmit, errors, reset } = useForm();
 
   const onSubmit = async (data) => {
-    const { data: user } = await login(data);
-    console.log(user);
-    reset({ email: "" });
-    reset({ password: "" });
+    try {
+      await authService.login(data);
+      // console.log(user);
+      // window.location = "/";
+      props.history.push("/");
+      // reset({ email: "" });
+      // reset({ password: "" });
+    } catch (ex) {
+      console.log("exception", ex);
+    }
   };
 
   return (

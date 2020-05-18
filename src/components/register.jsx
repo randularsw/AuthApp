@@ -3,15 +3,20 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { addUser } from "../services/userService";
 
-const Register = () => {
+const Register = (props) => {
   const { register, handleSubmit, errors, reset } = useForm();
 
   const onSubmit = async (data) => {
-    const { data: user } = await addUser(data);
-    console.log(user);
-    reset({ email: "" });
-    reset({ name: "" });
-    reset({ password: "" });
+    try {
+      await addUser(data);
+      // console.log(user);
+      props.history.push("/");
+      // reset({ email: "" });
+      // reset({ name: "" });
+      // reset({ password: "" });
+    } catch (ex) {
+      console.log("exception", ex);
+    }
   };
 
   return (

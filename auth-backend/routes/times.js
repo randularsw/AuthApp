@@ -18,7 +18,7 @@ router.post("/", verify, async (req, res) => {
     const time = new Time({
       data: req.body.data,
     });
-    // console.log(time);
+    console.log(req.headers.token);
     const savedTime = await time.save();
     res.send(savedTime);
   } catch (error) {
@@ -26,7 +26,7 @@ router.post("/", verify, async (req, res) => {
   }
 });
 
-router.delete("/", async (req, res) => {
+router.delete("/", verify, async (req, res) => {
   try {
     const times = await Time.deleteMany({});
     console.log(times);

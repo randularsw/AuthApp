@@ -5,9 +5,13 @@ export function getTimes() {
 }
 
 export function addTime(time) {
-  return axios.post("http://localhost:4000/api/times", time);
+  return axios.post("http://localhost:4000/api/times", time, {
+    headers: { token: localStorage.token },
+  });
 }
 
 export function deleteAll() {
-  return axios.delete("http://localhost:4000/api/times");
+  return axios.delete("http://localhost:4000/api/times", {
+    headers: { token: localStorage.token },
+  });
 }

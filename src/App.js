@@ -5,6 +5,7 @@ import Home from "./components/home";
 import { Route, Switch } from "react-router-dom";
 import Login from "./components/login";
 import Register from "./components/register";
+import Logout from "./components/logout";
 
 function App() {
   console.log("app");
@@ -14,6 +15,7 @@ function App() {
       <main className="container">
         <Switch>
           <Route path="/login" component={Login}></Route>
+          <Route path="/logout" component={Logout}></Route>
           <Route path="/register" component={Register}></Route>
           <Route path="/" component={Home}></Route>
         </Switch>

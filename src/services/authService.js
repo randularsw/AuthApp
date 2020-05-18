@@ -1,5 +1,21 @@
 import axios from "axios";
 
-export function login(data) {
-  return axios.post("http://localhost:4000/api/users/login", data);
+export async function login(data) {
+  const { headers } = await axios.post(
+    "http://localhost:4000/api/users/login",
+    data
+  );
+  localStorage.setItem("token", headers.token);
 }
+
+export function logout() {
+  localStorage.removeItem("token");
+}
+
+export function gwtCurrentUser() {}
+
+export default {
+  login,
+  logout,
+  gwtCurrentUser,
+};
