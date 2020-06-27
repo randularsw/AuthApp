@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import authService from "../services/authService";
 import { UserContext } from "../contexts/userContext";
 
 class Navbar extends Component {
@@ -12,7 +11,7 @@ class Navbar extends Component {
 
   currentUser = async () => {
     try {
-      await this.context.currentUser();
+      this.context.currentUser();
     } catch (ex) {
       console.log("exception", ex);
     }

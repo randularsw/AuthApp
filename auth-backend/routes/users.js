@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
     res
       .header("token", token)
       .header("access-control-expose-headers", "token")
-      .send({ data: saved._id });
+      .send(saved);
   } catch (error) {
     res.send({ data: error });
   }
@@ -44,7 +44,7 @@ router.post("/login", async (req, res) => {
     res
       .header("token", token)
       .header("access-control-expose-headers", "token")
-      .send({ data: user._id });
+      .send(user);
   } catch (error) {
     res.send({ data: error });
   }

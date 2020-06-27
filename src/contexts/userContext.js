@@ -6,13 +6,13 @@ export const UserContext = React.createContext();
 class UserProvider extends Component {
   state = {
     isAuthenticated: false,
-    user: {},
+    user: null,
   };
 
-  loginUser = (user) => {
-    authService.login(user);
-    user.isAuthenticated = true;
-    this.setState(user);
+  loginUser = async (data) => {
+    const user = await authService.login(data);
+    const isAuthenticated = true;
+    this.setState({ isAuthenticated, user });
   };
 
   currentUser = async () => {
@@ -25,12 +25,20 @@ class UserProvider extends Component {
     }
   };
 
+  logoutUser = () => {
+    authService.logout();
+    const isAuthenticated = false;
+    const user = null;
+    this.setState({ isAuthenticated, user });
+  };
+
   render() {
     return (
       <UserContext.Provider
         value={{
           state: this.state,
           login: this.loginUser,
+          logout: this.logoutUser,
           currentUser: this.currentUser,
         }}
       >
