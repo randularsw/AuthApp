@@ -59,7 +59,7 @@ class Home extends Component {
   };
 
   render() {
-    console.log("Render Home");
+    // console.log("Render Home");
     const { times } = this.state;
     return (
       <div>

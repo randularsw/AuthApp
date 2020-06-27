@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { addUser } from "../services/userService";
+import { UserContext } from "../contexts/userContext";
 
 const Register = (props) => {
   const { register, handleSubmit, errors, reset } = useForm();
+  const context = useContext(UserContext);
 
   const onSubmit = async (data) => {
     try {
-      await addUser(data);
+      await context.register(data);
       // console.log(user);
       props.history.push("/");
       // reset({ email: "" });

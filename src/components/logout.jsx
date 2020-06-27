@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import authService from "../services/authService";
 import { UserContext } from "../contexts/userContext";
 
 class Logout extends Component {

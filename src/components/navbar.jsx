@@ -44,9 +44,6 @@ class Navbar extends Component {
                 <NavLink className="nav-item nav-link" to="/login">
                   Login
                 </NavLink>
-                <a className="nav-item nav-link" onClick={this.current}>
-                  Current
-                </a>
               </React.Fragment>
             )}
           </div>

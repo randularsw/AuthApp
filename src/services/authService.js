@@ -1,7 +1,5 @@
 import axios from "axios";
 import JwtDecode from "jwt-decode";
-import { UserContext } from "../contexts/userContext";
-import { useContext } from "react";
 
 export async function login(data) {
   try {
@@ -10,7 +8,7 @@ export async function login(data) {
       data
     );
     localStorage.setItem("token", user.headers.token);
-    console.log(user.data);
+    // console.log(user.data);
     return user.data;
   } catch (ex) {
     console.log("exception", ex);

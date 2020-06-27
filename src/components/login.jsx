@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import authService from "../services/authService";
 import { UserContext } from "../contexts/userContext";
 
 const Login = (props) => {
