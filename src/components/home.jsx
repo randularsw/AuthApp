@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { getTimes, addTime, deleteAll } from "../services/timeService";
+import { Link } from "react-router-dom";
+import authService from "../services/authService";
 
 class Home extends Component {
   state = {
@@ -46,6 +48,16 @@ class Home extends Component {
     }
   };
 
+  current = async () => {
+    try {
+      const { data: user } = await authService.getCurrentUser();
+      console.log(user);
+    } catch (ex) {
+      console.log("exception", ex);
+      // if(ex.response)
+    }
+  };
+
   render() {
     console.log("Render Home");
     const { times } = this.state;
@@ -73,7 +85,9 @@ class Home extends Component {
         <div className="d-flex justify-content-center">
           <ul>
             {times.map((t) => (
-              <li key={t._id}>{t.data}</li>
+              <li key={t._id}>
+                <Link to={"/times/" + t._id}>{t.data}</Link>
+              </li>
             ))}
           </ul>
         </div>

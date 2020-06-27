@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import authService from "../services/authService";
+import { UserContext } from "../contexts/userContext";
 
 const Login = (props) => {
+  const context = useContext(UserContext);
   const { register, handleSubmit, errors, reset } = useForm();
 
   const onSubmit = async (data) => {
     try {
-      await authService.login(data);
+      await context.login(data);
       // console.log(user);
       // window.location = "/";
       props.history.push("/");

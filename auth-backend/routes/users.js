@@ -50,4 +50,14 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    // delete user.password;
+    res.send(user);
+  } catch (error) {
+    res.send({ data: error });
+  }
+});
+
 module.exports = router;

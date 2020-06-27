@@ -13,6 +13,16 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const time = await Time.findById(req.params.id);
+    // console.log(time);
+    res.json(time);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
 router.post("/", verify, async (req, res) => {
   try {
     const time = new Time({
